@@ -6,8 +6,21 @@
     <li>Lastname: {{ playlist.user.firstName }}</li>
   </ul>
   <div *ngFor="let song of playlist.songs">
-    <p>{{ song.title }}</p>
-    <p>{{ song.artist }}</p>
-    <p>{{ song.link }}</p>
+    <a href="{{ song.link }}">{{ song.title }} - {{ song.artist }}</a>
   </div>
+  <form [formGroup]="addform" (ngSubmit)="newSong()">
+    <div class="formgroup">
+      <label for="title">Title</label>
+      <input type="text" formControlName="title" required placeholder="" />
+    </div>
+    <div class="formgroup">
+      <label for="artist">Artist</label>
+      <input type="text" formControlName="artist" required placeholder="" />
+    </div>
+    <div class="formgroup">
+      <label for="link">Link</label>
+      <input type="text" formControlName="link" required placeholder="" />
+    </div>
+    <button type="submit">Add song</button>
+  </form>
 </div>
