@@ -7,7 +7,7 @@ import { Playlist } from './playlist';
   providedIn: 'root',
 })
 export class PlaylistService {
-  private url: string = '';
+  private url: string = 'https://localhost:44373/playlist';
 
   constructor(private http: HttpClient) {}
 

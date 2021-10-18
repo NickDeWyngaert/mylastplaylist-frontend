@@ -9,18 +9,20 @@ import { PlaylistService } from '../playlist.service';
   styleUrls: ['./playlists.component.css'],
 })
 export class PlaylistsComponent implements OnInit {
+  done: boolean = false;
   playlists: Playlist[] = [];
 
   constructor(private service: PlaylistService) {}
 
   ngOnInit(): void {
-    //this.setPlaylists();
+    this.setPlaylists();
   }
 
   private setPlaylists(): void {
     this.service.getAll().subscribe(
       (playlists: Playlist[]) => {
         this.playlists = playlists;
+        this.done = true;
       },
       (error: HttpErrorResponse) => {
         console.log('Error while fetching playlists', error);

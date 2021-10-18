@@ -1,10 +1,5 @@
-import { Song } from "./song";
+import { Song } from './song';
 
 export class Playlist {
-
-constructor(
-    public userid?: number,
-    public songs?: Song[]
-) {}
-
+  constructor(public userId?: number, public songs?: Song[]) {}
 }
