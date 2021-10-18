@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, PlaylistsComponent],
+  declarations: [AppComponent, PlaylistsComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
