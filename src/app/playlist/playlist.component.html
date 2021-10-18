@@ -1,0 +1,13 @@
+<h2>Playlist</h2>
+<div *ngIf="playlist">
+  <ul>
+    <li>Id: {{ playlist.user.id }}</li>
+    <li>Firstname: {{ playlist.user.lastName }}</li>
+    <li>Lastname: {{ playlist.user.firstName }}</li>
+  </ul>
+  <div *ngFor="let song of playlist.songs">
+    <p>{{ song.title }}</p>
+    <p>{{ song.artist }}</p>
+    <p>{{ song.link }}</p>
+  </div>
+</div>

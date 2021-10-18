@@ -7,9 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
-  declarations: [AppComponent, PlaylistsComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    PlaylistsComponent,
+    HomeComponent,
+    PlaylistComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
