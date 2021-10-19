@@ -52,7 +52,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   private getPlaylistWithUserId(id: number): void {
-    this.service.get(id).subscribe(
+    this.service.getPlaylist(id).subscribe(
       (playlist: Playlist) => {
         this.playlist = playlist;
         this.done = true;
@@ -76,7 +76,7 @@ export class PlaylistComponent implements OnInit {
   newSong(): void {
     let newSong: Song = <Song>this.addform.value;
     let userId: number = this.playlist?.user.id!;
-    this.service.post(userId, newSong).subscribe(
+    this.service.addSongToPlaylist(userId, newSong).subscribe(
       (playlist: Playlist) => {
         this.resetAddform();
         this.getPlaylistWithUserId(userId);

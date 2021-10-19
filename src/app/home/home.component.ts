@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   private setUsers(): void {
-    this.service.getUsers().subscribe(
+    this.service.getAllUsers().subscribe(
       (users: User[]) => {
         this.users = users;
         this.done = true;
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   newUser(): void {
     let newUser: User = <User>this.addform.value;
-    this.service.newUser(newUser).subscribe(
+    this.service.makeNewPlaylistForNewUser(newUser).subscribe(
       (user: User) => {
         this.resetAddform();
         this.setUsers();

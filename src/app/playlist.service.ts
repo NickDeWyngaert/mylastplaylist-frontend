@@ -14,23 +14,26 @@ export class PlaylistService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Playlist[]> {
+  getAllPlaylists(): Observable<Playlist[]> {
     return this.http.get<Playlist[]>(`${this.url}/${this.resource}`);
   }
 
-  newUser(user: User): Observable<User> {
+  makeNewPlaylistForNewUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.url}/${this.resource}`, user);
   }
 
-  get(id: number): Observable<Playlist> {
+  getPlaylist(id: number): Observable<Playlist> {
     return this.http.get<Playlist>(`${this.url}/${this.resource}/${id}`);
   }
 
-  post(id: number, song: Song): Observable<Playlist> {
-    return this.http.post<Playlist>(`${this.url}/${this.resource}/${id}`, song);
+  addSongToPlaylist(userid: number, song: Song): Observable<Playlist> {
+    return this.http.post<Playlist>(
+      `${this.url}/${this.resource}/${userid}`,
+      song
+    );
   }
 
-  getUsers(): Observable<User[]> {
+  getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/${this.resource}/users`);
   }
 }
