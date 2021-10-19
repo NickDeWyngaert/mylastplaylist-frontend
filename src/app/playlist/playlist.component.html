@@ -4,6 +4,10 @@
     <li>Id: {{ playlist.user.id }}</li>
     <li>Firstname: {{ playlist.user.lastName }}</li>
     <li>Lastname: {{ playlist.user.firstName }}</li>
+    <li>
+      <!-- Currently the dayOfBirth doesn't work? -->
+      Day of birth: {{ playlist.user.dayOfBirth }}
+    </li>
   </ul>
   <div *ngFor="let song of playlist.songs">
     <a href="{{ song.link }}">{{ song.title }} - {{ song.artist }}</a>
