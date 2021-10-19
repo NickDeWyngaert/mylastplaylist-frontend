@@ -18,6 +18,10 @@ export class PlaylistService {
     return this.http.get<Playlist[]>(`${this.url}/${this.resource}`);
   }
 
+  newUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}/${this.resource}`, user);
+  }
+
   get(id: number): Observable<Playlist> {
     return this.http.get<Playlist>(`${this.url}/${this.resource}/${id}`);
   }

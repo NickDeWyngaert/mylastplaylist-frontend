@@ -21,6 +21,8 @@
       <label for="link">Link</label>
       <input type="text" formControlName="link" required placeholder="" />
     </div>
-    <button type="submit">Add song</button>
+    <button type="submit" [disabled]="addform.invalid || !addform.touched">
+      Add song
+    </button>
   </form>
 </div>

@@ -5,4 +5,21 @@
       >{{ user.lastName }} {{ user.firstName }}</a
     >
   </div>
+  <form [formGroup]="addform" (ngSubmit)="newUser()">
+    <div class="formgroup">
+      <label for="firstName">First name</label>
+      <input type="text" formControlName="firstName" required placeholder="" />
+    </div>
+    <div class="formgroup">
+      <label for="lastName">Last name</label>
+      <input type="text" formControlName="lastName" required placeholder="" />
+    </div>
+    <div class="formgroup">
+      <label for="dayOfBirth">Date of birth</label>
+      <input type="datetime-local" formControlName="dayOfBirth" required />
+    </div>
+    <button type="submit" [disabled]="addform.invalid || !addform.touched">
+      Add user
+    </button>
+  </form>
 </div>
