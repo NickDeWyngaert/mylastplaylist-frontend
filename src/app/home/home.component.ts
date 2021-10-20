@@ -134,7 +134,9 @@ export class AddplaylistDialog implements OnInit {
         this.closeDialog();
       },
       (error: HttpErrorResponse) => {
-        console.log('Failed to add new user', error);
+        this.openSnackBar('Failed to create new playlist');
+        console.error('Failed to create new playlist', error);
+        this.closeDialog();
       }
     );
   }

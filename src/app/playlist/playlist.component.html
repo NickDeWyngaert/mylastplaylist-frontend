@@ -1,17 +1,10 @@
 <h2>Playlist</h2>
 <div *ngIf="playlist">
-  <ul>
-    <li>Id: {{ playlist.user.id }}</li>
-    <li>Firstname: {{ playlist.user.lastName }}</li>
-    <li>Lastname: {{ playlist.user.firstName }}</li>
-    <li>
-      <!-- Currently the dayOfBirth doesn't work? -->
-      Day of birth: {{ playlist.user.dayOfBirth }}
+  <ul *ngIf="playlist.songs">
+    <li *ngFor="let song of playlist.songs">
+      <a href="{{ song.link }}">{{ song.title }} - {{ song.artist }}</a>
     </li>
   </ul>
-  <div *ngFor="let song of playlist.songs">
-    <a href="{{ song.link }}">{{ song.title }} - {{ song.artist }}</a>
-  </div>
   <form [formGroup]="addform" (ngSubmit)="newSong()">
     <div class="formgroup">
       <label for="title">Title</label>
