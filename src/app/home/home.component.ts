@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   private setUsers(): void {
     this.service.getAllUsers().subscribe(
       (users: User[]) => {
+        console.log(users);
         this.users = users;
         this.done = true;
         this.setAddForm();
