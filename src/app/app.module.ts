@@ -22,17 +22,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent, AddplaylistDialog } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { DialogAddplaylistComponent } from './dialog-addplaylist/dialog-addplaylist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddplaylistDialog,
     PlaylistComponent,
     ToolbarComponent,
+    DialogAddplaylistComponent,
   ],
   imports: [
     BrowserModule,
