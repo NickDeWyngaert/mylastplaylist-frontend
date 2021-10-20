@@ -6,11 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Playlist } from '../playlist';
 import { PlaylistService } from '../playlist.service';

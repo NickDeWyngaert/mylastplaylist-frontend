@@ -34,7 +34,6 @@ export class DialogAddsongComponent implements OnInit {
 
   ngOnInit(): void {
     this.userid = this.data.userid;
-    console.log(this.data.userid);
     this.form = this.fb.group({
       title: new FormControl('', [
         Validators.required,
