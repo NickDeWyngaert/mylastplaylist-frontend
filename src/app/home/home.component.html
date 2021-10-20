@@ -24,7 +24,7 @@
   -->
   <div *ngIf="done && !fetcherror">
     <h2>Please select the user :)</h2>
-    <mat-list *ngIf="users && users != []" class="list">
+    <mat-list *ngIf="users && users.length > 0" class="list">
       <a
         mat-list-item
         class="list-item"
@@ -37,7 +37,7 @@
         ({{ showOnlyDateFromDatetime(user.dayOfBirth) }})
       </a>
     </mat-list>
-    <div *ngIf="users && users == []">
+    <div *ngIf="users && users.length == 0">
       <p>No users available :(</p>
     </div>
     <h2>Or make a new playlist</h2>

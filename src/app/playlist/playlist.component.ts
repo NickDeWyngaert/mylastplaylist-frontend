@@ -19,7 +19,7 @@ import { Song } from '../song';
 export class PlaylistComponent implements OnInit {
   done: boolean = false;
   playlist: Playlist | null = null;
-  addform: FormGroup = this.fb.group({});
+  form: FormGroup = this.fb.group({});
   private urlRegex =
     /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
 
@@ -33,7 +33,7 @@ export class PlaylistComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       let userid: number = <number>params['id'];
       this.getPlaylistWithUserId(userid);
-      this.addform = this.fb.group({
+      this.form = this.fb.group({
         title: new FormControl('', [
           Validators.required,
           Validators.nullValidator,
@@ -64,17 +64,17 @@ export class PlaylistComponent implements OnInit {
   }
 
   get title() {
-    return this.addform.get('title');
+    return this.form.get('title');
   }
   get artist() {
-    return this.addform.get('artist');
+    return this.form.get('artist');
   }
   get link() {
-    return this.addform.get('link');
+    return this.form.get('link');
   }
 
   newSong(): void {
-    let newSong: Song = <Song>this.addform.value;
+    let newSong: Song = <Song>this.form.value;
     let userId: number = this.playlist?.user.id!;
     this.service.addSongToPlaylist(userId, newSong).subscribe(
       (playlist: Playlist) => {
@@ -88,6 +88,6 @@ export class PlaylistComponent implements OnInit {
   }
 
   resetAddform(): void {
-    this.addform.reset();
+    this.form.reset();
   }
 }
