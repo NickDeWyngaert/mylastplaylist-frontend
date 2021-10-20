@@ -54,7 +54,9 @@ export class PlaylistComponent implements OnInit {
   }
 
   openAddSongDialog(): void {
-    let addsongDialog = this.dialog.open(DialogAddsongComponent);
+    let addsongDialog = this.dialog.open(DialogAddsongComponent, {
+      data: { userid: this.userid },
+    });
     addsongDialog.afterClosed().subscribe((_) => {
       this.getPlaylistFromUserId();
     });

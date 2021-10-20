@@ -1,14 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Params } from '@angular/router';
 import { Playlist } from '../playlist';
 import { PlaylistService } from '../playlist.service';
 import { Song } from '../song';
@@ -29,15 +28,13 @@ export class DialogAddsongComponent implements OnInit {
     private service: PlaylistService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private activatedRoute: ActivatedRoute,
-    private dialogRef: MatDialogRef<DialogAddsongComponent>
+    private dialogRef: MatDialogRef<DialogAddsongComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { userid: number }
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      let userid: number = <number>params['id'];
-      this.userid = userid;
-    });
+    this.userid = this.data.userid;
+    console.log(this.data.userid);
     this.form = this.fb.group({
       title: new FormControl('', [
         Validators.required,
