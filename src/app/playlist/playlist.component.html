@@ -23,7 +23,13 @@
     Done loading and everything ok
   -->
   <div *ngIf="done && !fetcherror">
-    <div *ngIf="playlist">
+    <div class="innersection">
+      <button mat-raised-button color="accent" [routerLink]="['/home']">
+        <mat-icon>arrow_back</mat-icon>
+        Other user
+      </button>
+    </div>
+    <div class="innersection" *ngIf="playlist">
       <h2 *ngIf="playlist.user">R.I.P. {{ playlist.user!.firstName }}</h2>
       <ul *ngIf="playlist.songs && playlist.songs.length > 0">
         <li *ngFor="let song of playlist.songs">
@@ -33,6 +39,8 @@
       <p *ngIf="playlist.songs && playlist.songs.length == 0">
         There are no songs yet.
       </p>
+    </div>
+    <div class="innersection" *ngIf="playlist">
       <button mat-raised-button color="primary" (click)="openAddSongDialog()">
         Add song
       </button>
