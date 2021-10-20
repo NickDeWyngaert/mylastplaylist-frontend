@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Playlist } from '../playlist';
 import { PlaylistService } from '../playlist.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Song } from '../song';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddsongComponent } from '../dialog-addsong/dialog-addsong.component';
 
 @Component({
   selector: 'app-playlist',
@@ -21,14 +16,11 @@ export class PlaylistComponent implements OnInit {
   fetcherror: boolean = false;
   userid: number = 0;
   playlist: Playlist | null = null;
-  form: FormGroup = this.fb.group({});
-  private urlRegex =
-    /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private service: PlaylistService,
-    private fb: FormBuilder
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -36,21 +28,6 @@ export class PlaylistComponent implements OnInit {
       let userid: number = <number>params['id'];
       this.userid = userid;
       this.getPlaylistFromUserId();
-      this.form = this.fb.group({
-        title: new FormControl('', [
-          Validators.required,
-          Validators.nullValidator,
-        ]),
-        artist: new FormControl('', [
-          Validators.required,
-          Validators.nullValidator,
-        ]),
-        link: new FormControl('', [
-          Validators.required,
-          Validators.nullValidator,
-          //Validators.pattern(this.urlRegex), // doesn't work anymore?
-        ]),
-      });
     });
   }
 
@@ -76,31 +53,10 @@ export class PlaylistComponent implements OnInit {
     this.getPlaylistFromUserId();
   }
 
-  get title() {
-    return this.form.get('title');
-  }
-  get artist() {
-    return this.form.get('artist');
-  }
-  get link() {
-    return this.form.get('link');
-  }
-
-  newSong(): void {
-    let newSong: Song = <Song>this.form.value;
-    let userId: number = this.playlist?.user.id!;
-    this.service.addSongToPlaylist(userId, newSong).subscribe(
-      (playlist: Playlist) => {
-        this.resetAddform();
-        this.getPlaylistFromUserId(userId);
-      },
-      (error: HttpErrorResponse) => {
-        console.log('Failed to add new song', error);
-      }
-    );
-  }
-
-  resetAddform(): void {
-    this.form.reset();
+  openAddSongDialog(): void {
+    let addsongDialog = this.dialog.open(DialogAddsongComponent);
+    addsongDialog.afterClosed().subscribe((_) => {
+      this.getPlaylistFromUserId();
+    });
   }
 }

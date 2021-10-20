@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>New Song</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Please enter the title, artist and a Spotify link</h3>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Artist</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="artist"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Spotify Link</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="link"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close (click)="closeDialog()">Close</button>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="mat-raised-button mat-primary"
+    [disabled]="form.invalid || !form.touched"
+    (click)="submitSongToPlaylist()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <button mat-button [disabled]="!form.touched" (click)="resetForm()">
+    Reset
+  </button>
+</mat-dialog-actions>

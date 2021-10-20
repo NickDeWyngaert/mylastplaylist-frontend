@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DialogAddplaylistComponent } from './dialog-addplaylist/dialog-addplaylist.component';
+import { DialogAddsongComponent } from './dialog-addsong/dialog-addsong.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DialogAddplaylistComponent } from './dialog-addplaylist/dialog-addplayl
     PlaylistComponent,
     ToolbarComponent,
     DialogAddplaylistComponent,
+    DialogAddsongComponent,
   ],
   imports: [
     BrowserModule,

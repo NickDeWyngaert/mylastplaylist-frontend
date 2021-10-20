@@ -33,23 +33,9 @@
       <p *ngIf="playlist.songs && playlist.songs.length == 0">
         There are no songs yet.
       </p>
-      <!-- <form [formGroup]="form" (ngSubmit)="newSong()">
-      <div class="formgroup">
-        <label for="title">Title</label>
-        <input type="text" formControlName="title" required placeholder="" />
-      </div>
-      <div class="formgroup">
-        <label for="artist">Artist</label>
-        <input type="text" formControlName="artist" required placeholder="" />
-      </div>
-      <div class="formgroup">
-        <label for="link">Link</label>
-        <input type="text" formControlName="link" required placeholder="" />
-      </div>
-      <button type="submit" [disabled]="form.invalid || !form.touched">
+      <button mat-raised-button color="primary" (click)="openAddSongDialog()">
         Add song
       </button>
-    </form> -->
     </div>
   </div>
 </section>
