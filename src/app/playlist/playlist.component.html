@@ -24,24 +24,29 @@
   -->
   <div *ngIf="done && !fetcherror">
     <div class="innersection">
-      <button mat-raised-button color="accent" [routerLink]="['/home']">
+      <button mat-raised-button color="secondary" [routerLink]="['/home']">
         <mat-icon>arrow_back</mat-icon>
         Other user
       </button>
     </div>
     <div class="innersection" *ngIf="playlist">
-      <h2 *ngIf="playlist.user">R.I.P. {{ playlist.user!.firstName }}</h2>
+      <h2 *ngIf="playlist.user">
+        R.I.P. {{ playlist.user!.firstName }}, your playlist is safe in heaven.
+      </h2>
       <ul *ngIf="playlist.songs && playlist.songs.length > 0">
         <li *ngFor="let song of playlist.songs">
-          <a href="{{ song.link }}">{{ song.title }} - {{ song.artist }}</a>
+          <a href="{{ song.link }}" target="_blank">
+            {{ song.title }} - {{ song.artist }}
+          </a>
         </li>
       </ul>
-      <p *ngIf="playlist.songs && playlist.songs.length == 0">
-        There are no songs yet.
+      <p *ngIf="playlist.user && playlist.songs && playlist.songs.length == 0">
+        There are no songs yet. {{ playlist.user!.firstName }} won't be happy.
       </p>
     </div>
     <div class="innersection" *ngIf="playlist">
-      <button mat-raised-button color="primary" (click)="openAddSongDialog()">
+      <button mat-raised-button color="accent" (click)="openAddSongDialog()">
+        <mat-icon>playlist_add_circle</mat-icon>
         Add song
       </button>
     </div>
