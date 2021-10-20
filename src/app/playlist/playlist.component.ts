@@ -18,6 +18,8 @@ import { Song } from '../song';
 })
 export class PlaylistComponent implements OnInit {
   done: boolean = false;
+  fetcherror: boolean = false;
+  userid: number = 0;
   playlist: Playlist | null = null;
   form: FormGroup = this.fb.group({});
   private urlRegex =
@@ -32,7 +34,8 @@ export class PlaylistComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       let userid: number = <number>params['id'];
-      this.getPlaylistWithUserId(userid);
+      this.userid = userid;
+      this.getPlaylistFromUserId();
       this.form = this.fb.group({
         title: new FormControl('', [
           Validators.required,
@@ -51,16 +54,26 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
-  private getPlaylistWithUserId(id: number): void {
-    this.service.getPlaylist(id).subscribe(
+  // default is the userid from the url
+  private getPlaylistFromUserId(userid: number = this.userid): void {
+    this.done = false;
+    this.fetcherror = false;
+    this.service.getPlaylist(userid).subscribe(
       (playlist: Playlist) => {
         this.playlist = playlist;
         this.done = true;
+        this.fetcherror = false;
       },
       (error: HttpErrorResponse) => {
+        this.done = true;
+        this.fetcherror = true;
         console.log('Error while fetching playlist with id', error);
       }
     );
+  }
+
+  retry(): void {
+    this.getPlaylistFromUserId();
   }
 
   get title() {
@@ -79,7 +92,7 @@ export class PlaylistComponent implements OnInit {
     this.service.addSongToPlaylist(userId, newSong).subscribe(
       (playlist: Playlist) => {
         this.resetAddform();
-        this.getPlaylistWithUserId(userId);
+        this.getPlaylistFromUserId(userId);
       },
       (error: HttpErrorResponse) => {
         console.log('Failed to add new song', error);
