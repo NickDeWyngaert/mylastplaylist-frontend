@@ -1,9 +1,12 @@
 <h2>Please select the user</h2>
 <div *ngIf="done">
-  <div *ngFor="let user of users">
-    <!-- [routerLink]=['/playlists/' + user.id] -->
-    <a *ngIf="user">{{ user.lastName }} {{ user.firstName }}</a>
-  </div>
+  <ul *ngIf="users">
+    <li *ngFor="let user of users">
+      <a *ngIf="user" [routerLink]="['/playlists/' + user.id]">
+        {{ user.lastName }} {{ user.firstName }}
+      </a>
+    </li>
+  </ul>
   <form [formGroup]="addform" (ngSubmit)="newUser()">
     <div class="formgroup">
       <label for="firstName">First name</label>
