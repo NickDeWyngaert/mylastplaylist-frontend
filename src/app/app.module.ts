@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent, AddplaylistDialog } from './home/home.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
@@ -30,6 +30,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
   declarations: [
     AppComponent,
     HomeComponent,
+    AddplaylistDialog,
     PlaylistComponent,
     ToolbarComponent,
   ],
@@ -52,6 +53,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatCardModule,
     MatTableModule,
     MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

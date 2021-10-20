@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>New Playlist</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Please enter your information :)</h3>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>First name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="firstName"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="lastName"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date of birth</mat-label>
+      <input
+        matInput
+        type="datetime-local"
+        formControlName="dayOfBirth"
+        required
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close (click)="closeDialog()">Close</button>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="mat-raised-button mat-primary"
+    [disabled]="form.invalid || !form.touched"
+    (click)="submitNewUserForNewPlaylist()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <button mat-button [disabled]="!form.touched" (click)="resetForm()">
+    Reset
+  </button>
+</mat-dialog-actions>

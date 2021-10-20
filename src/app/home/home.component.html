@@ -37,30 +37,9 @@
         ({{ showOnlyDateFromDatetime(user.dayOfBirth) }})
       </a>
     </mat-list>
-    <h2>Or add the user</h2>
-    <button mat-raised-button color="primary">Add user</button>
-
-    <form [formGroup]="addform" (ngSubmit)="newUser()">
-      <div class="formgroup">
-        <label for="firstName">First name</label>
-        <input
-          type="text"
-          formControlName="firstName"
-          required
-          placeholder=""
-        />
-      </div>
-      <div class="formgroup">
-        <label for="lastName">Last name</label>
-        <input type="text" formControlName="lastName" required placeholder="" />
-      </div>
-      <div class="formgroup">
-        <label for="dayOfBirth">Date of birth</label>
-        <input type="datetime-local" formControlName="dayOfBirth" required />
-      </div>
-      <button type="submit" [disabled]="addform.invalid || !addform.touched">
-        Add user
-      </button>
-    </form>
+    <h2>Or make a new playlist</h2>
+    <button mat-raised-button color="primary" (click)="openAddplaylistDialog()">
+      Add playlist
+    </button>
   </div>
 </section>

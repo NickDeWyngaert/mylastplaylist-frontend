@@ -13,3 +13,13 @@ body {
 .section {
   margin: 2em;
 }
+
+/* Space between items on auto */
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* Global margin */
+.mat-form-field {
+  margin: 0.5em;
+}

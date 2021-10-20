@@ -6,6 +6,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Playlist } from '../playlist';
 import { PlaylistService } from '../playlist.service';
 import { User } from '../user';
 
@@ -20,11 +27,14 @@ export class HomeComponent implements OnInit {
   users: User[] = [];
   addform: FormGroup = this.fb.group({});
 
-  constructor(private service: PlaylistService, private fb: FormBuilder) {}
+  constructor(
+    private service: PlaylistService,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.setUsers();
-    this.setAddForm();
   }
 
   private setUsers(): void {
@@ -57,8 +67,38 @@ export class HomeComponent implements OnInit {
       .replace('-', '/');
   }
 
-  private setAddForm(): void {
-    this.addform = this.fb.group({
+  openAddplaylistDialog(): void {
+    let addplaylistDialog = this.dialog.open(AddplaylistDialog);
+    addplaylistDialog.afterClosed().subscribe((_) => {
+      this.setUsers();
+    });
+  }
+}
+
+/*
+  Add playlist dialog (temporary in this file because its no where else used)
+ */
+@Component({
+  selector: 'addplaylist-dialog',
+  templateUrl: 'addplaylist-dialog.html',
+})
+export class AddplaylistDialog implements OnInit {
+  form: FormGroup = this.fb.group({});
+  private snackbarDuration: number = 4 * 1000;
+
+  constructor(
+    private service: PlaylistService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<AddplaylistDialog>
+  ) {}
+
+  ngOnInit(): void {
+    this.initAddForm();
+  }
+
+  private initAddForm(): void {
+    this.form = this.fb.group({
       firstName: new FormControl('', [
         Validators.required,
         Validators.nullValidator,
@@ -75,21 +115,23 @@ export class HomeComponent implements OnInit {
   }
 
   get firstName() {
-    return this.addform.get('firstName');
+    return this.form.get('firstName');
   }
   get lastName() {
-    return this.addform.get('lastName');
+    return this.form.get('lastName');
   }
   get dayOfBirth() {
-    return this.addform.get('dayOfBirth');
+    return this.form.get('dayOfBirth');
   }
 
-  newUser(): void {
-    let newUser: User = <User>this.addform.value;
+  submitNewUserForNewPlaylist(): void {
+    let newUser: User = <User>this.form.value;
     this.service.makeNewPlaylistForNewUser(newUser).subscribe(
-      (user: User) => {
-        this.resetAddform();
-        this.setUsers();
+      (playlist: Playlist) => {
+        this.openSnackBar(
+          'Succesfully created a new playlist for ' + playlist.user.firstName
+        );
+        this.closeDialog();
       },
       (error: HttpErrorResponse) => {
         console.log('Failed to add new user', error);
@@ -97,7 +139,17 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  resetAddform(): void {
-    this.addform.reset();
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  resetForm(): void {
+    this.form.reset();
+  }
+
+  private openSnackBar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: this.snackbarDuration,
+    });
   }
 }
