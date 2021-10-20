@@ -16,6 +16,7 @@ import { User } from '../user';
 })
 export class HomeComponent implements OnInit {
   done: boolean = false;
+  fetcherror: boolean = false;
   users: User[] = [];
   addform: FormGroup = this.fb.group({});
 
@@ -23,20 +24,37 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.setUsers();
+    this.setAddForm();
   }
 
   private setUsers(): void {
+    this.done = false;
+    this.fetcherror = false;
     this.service.getAllUsers().subscribe(
       (users: User[]) => {
-        console.log(users);
         this.users = users;
         this.done = true;
-        this.setAddForm();
+        this.fetcherror = false;
       },
       (error: HttpErrorResponse) => {
         console.log('Error while fetching users', error);
+        this.done = true;
+        this.fetcherror = true;
       }
     );
+  }
+
+  retry(): void {
+    this.setUsers();
+  }
+
+  // 2000-09-13T00:13:09 => 2000/09/13
+  showOnlyDateFromDatetime(datetime: any): string {
+    return datetime
+      .toString()
+      .replace('-', '/')
+      .split('T')[0]
+      .replace('-', '/');
   }
 
   private setAddForm(): void {

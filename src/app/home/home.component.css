@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+}
+
+.list {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.list-item {
+  text-decoration: none;
+}
+
+.list-item:hover {
+  background-color: #d3d3d3;
+}

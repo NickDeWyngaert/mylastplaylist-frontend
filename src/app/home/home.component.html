@@ -1,27 +1,66 @@
-<h2>Please select the user</h2>
-<div *ngIf="done">
-  <ul *ngIf="users">
-    <li *ngFor="let user of users">
-      <a *ngIf="user" [routerLink]="['/playlists/' + user.id]">
-        {{ user.lastName }} {{ user.firstName }}
-      </a>
-    </li>
-  </ul>
-  <form [formGroup]="addform" (ngSubmit)="newUser()">
-    <div class="formgroup">
-      <label for="firstName">First name</label>
-      <input type="text" formControlName="firstName" required placeholder="" />
-    </div>
-    <div class="formgroup">
-      <label for="lastName">Last name</label>
-      <input type="text" formControlName="lastName" required placeholder="" />
-    </div>
-    <div class="formgroup">
-      <label for="dayOfBirth">Date of birth</label>
-      <input type="datetime-local" formControlName="dayOfBirth" required />
-    </div>
-    <button type="submit" [disabled]="addform.invalid || !addform.touched">
-      Add user
+<section class="section">
+  <!-- 
+    Still loading 
+  -->
+  <div *ngIf="!done && !fetcherror" class="wrapper">
+    <mat-spinner></mat-spinner>
+  </div>
+  <!-- 
+    Done loading but fetch error 
+  -->
+  <div *ngIf="done && fetcherror" class="wrapper">
+    <h2>Something went wrong while fetching the available users</h2>
+    <button
+      mat-flat-button
+      color="primary"
+      class="button-retry"
+      (click)="retry()"
+    >
+      <mat-icon>autorenew</mat-icon>
     </button>
-  </form>
-</div>
+  </div>
+  <!-- 
+    Done loading and everything ok
+  -->
+  <div *ngIf="done && !fetcherror">
+    <h2>Please select the user :)</h2>
+    <mat-list *ngIf="users" class="list">
+      <a
+        mat-list-item
+        class="list-item"
+        role="listitem"
+        *ngFor="let user of users"
+        [routerLink]="['/playlists/' + user.id]"
+      >
+        {{ user.lastName }}
+        {{ user.firstName }}
+        ({{ showOnlyDateFromDatetime(user.dayOfBirth) }})
+      </a>
+    </mat-list>
+    <h2>Or add the user</h2>
+    <button mat-raised-button color="primary">Add user</button>
+
+    <form [formGroup]="addform" (ngSubmit)="newUser()">
+      <div class="formgroup">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          required
+          placeholder=""
+        />
+      </div>
+      <div class="formgroup">
+        <label for="lastName">Last name</label>
+        <input type="text" formControlName="lastName" required placeholder="" />
+      </div>
+      <div class="formgroup">
+        <label for="dayOfBirth">Date of birth</label>
+        <input type="datetime-local" formControlName="dayOfBirth" required />
+      </div>
+      <button type="submit" [disabled]="addform.invalid || !addform.touched">
+        Add user
+      </button>
+    </form>
+  </div>
+</section>
