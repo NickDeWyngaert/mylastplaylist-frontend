@@ -33,13 +33,22 @@
       <h2 *ngIf="playlist.user">
         R.I.P. {{ playlist.user!.firstName }}, your playlist is safe in heaven.
       </h2>
-      <ul *ngIf="playlist.songs && playlist.songs.length > 0">
-        <li *ngFor="let song of playlist.songs">
-          <a href="{{ song.link }}" target="_blank">
-            {{ song.title }} - {{ song.artist }}
-          </a>
-        </li>
-      </ul>
+      <mat-list
+        *ngIf="playlist.songs && playlist.songs.length > 0"
+        class="list"
+      >
+        <a
+          mat-list-item
+          class="list-item"
+          role="listitem"
+          *ngFor="let song of playlist.songs"
+          href="{{ song.link }}"
+        >
+          <mat-icon class="list-item-icon">queue_music</mat-icon>
+          {{ song.title }} ({{ song.artist }})
+        </a>
+      </mat-list>
+
       <p *ngIf="playlist.user && playlist.songs && playlist.songs.length == 0">
         There are no songs yet. {{ playlist.user!.firstName }} won't be happy.
       </p>

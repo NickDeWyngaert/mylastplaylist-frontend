@@ -1,3 +1,16 @@
 .innersection {
   margin-bottom: 2em;
 }
+
+.list-item {
+  text-decoration: none;
+}
+
+.list-item:hover {
+  background-color: #d3d3d3;
+  text-decoration: unset;
+}
+
+.list-item-icon {
+  margin-right: 0.5em;
+}
